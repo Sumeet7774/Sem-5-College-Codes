@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <fstream>
 using namespace std;
 
 vector<string> findKeywords(string s,vector<string> arr)
@@ -59,20 +60,47 @@ vector<char> findOperators(string s, vector<char> arr)
     return operators;
 }
 
-
 int main()
 {
-    vector<string> keywordsList = {"int", "float", "double", "string", "char", "break", "catch", "for", "while", "class", "return", "goto", };
+    ofstream file("practical1_input.txt");
+    string input;
+
+    cout<<"Enter input: ";
+    cin>>input;
+
+    file<<input<<endl;
+    file.close();
+
+    ifstream inputFile("practical1_input.txt");
+
+    string line;
+    string totalline;
+
+    cout<<"Input is: ";
+    while(getline(inputFile, line))
+    {
+        cout<<line;
+        totalline = totalline + line;
+    }
+    cout<<endl;
+
+    if(totalline.empty())
+    {
+        cerr << "Error: Input string is empty!" << endl;
+        return 1;
+    }
+
+    inputFile.close();
+
+    vector<string> keywordsList = {"int", "float", "double", "string", "char", "break", "catch", "for", "while", "class", "return", "goto"};
     vector<string> variablesList = {"var1", "temp", "arr", "name"};
     vector<char> operatorsAndSpecialSymbolsList = {'+', '-', '/', '&', '*', '%', '!', '='};
 
-    string s;
-    cout<<"Enter string: ";
-    cin>>s;
+    cout<<endl<<endl;
 
-    vector<string> keywords = findKeywords(s, keywordsList);
-    vector<string> variables = findVariables(s, variablesList);
-    vector<char> operators = findOperators(s, operatorsAndSpecialSymbolsList);
+    vector<string> keywords = findKeywords(totalline, keywordsList);
+    vector<string> variables = findVariables(totalline, variablesList);
+    vector<char> operators = findOperators(totalline, operatorsAndSpecialSymbolsList);
 
     if(keywords.size()!=0)
     {
@@ -88,7 +116,6 @@ int main()
     {
         cout<<"Not Found"<<endl;
     }
-
 
     if(variables.size()!=0)
     {
