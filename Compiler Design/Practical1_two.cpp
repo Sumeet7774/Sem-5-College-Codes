@@ -86,7 +86,7 @@ int main()
 
     if(totalline.empty())
     {
-        cerr << "Error: Input string is empty!" << endl;
+        cout << "Error: Input string is empty!" << endl;
         return 1;
     }
 
