@@ -93,8 +93,8 @@ int main()
     inputFile.close();
 
     vector<string> keywordsList = {"int", "float", "double", "string", "char", "break", "catch", "for", "while", "class", "return", "goto"};
-    vector<string> variablesList = {"var1", "temp", "arr", "name"};
-    vector<char> operatorsAndSpecialSymbolsList = {'+', '-', '/', '&', '*', '%', '!', '='};
+    vector<string> variablesList = {"var1", "temp", "arr", "name","a", "b"};
+    vector<char> operatorsAndSpecialSymbolsList = {'+', '-', '/', '&', '*', '%', '!', '=', '(', ')' ,'1', '2', '3', '4', '5', '6','7', '8', '9', '0'};
 
     cout<<endl<<endl;
 
