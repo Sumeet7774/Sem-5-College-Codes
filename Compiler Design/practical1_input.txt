@@ -1,1 +1,1 @@
-inttempfor+-
+int float 12345 -*

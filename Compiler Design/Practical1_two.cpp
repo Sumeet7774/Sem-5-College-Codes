@@ -2,19 +2,21 @@
 #include <fstream>
 using namespace std;
 
+
 vector<string> findKeywords(string s,vector<string> arr)
 {
     vector<string> keywords;
+    istringstream iss(s);
+    string word;
 
-    for(int i=0; i<arr.size(); i++)
+    while (iss >> word) 
     {
-        int size = arr[i].size();
-    
-        for(int j=0; j<=s.size()-size; j++)
+        for (int i = 0; i < arr.size(); i++) 
         {
-            if(s.substr(j,size)==arr[i])
+            if (word == arr[i]) 
             {
                 keywords.push_back(arr[i]);
+                break;
             }
         }
     }
@@ -25,16 +27,17 @@ vector<string> findKeywords(string s,vector<string> arr)
 vector<string> findVariables(string s, vector<string> arr)
 {
     vector<string> variables;
+    istringstream iss(s);
+    string word;
 
-    for(int i=0; i<arr.size(); i++)
+    while (iss >> word) 
     {
-        int size = arr[i].size();
-    
-        for(int j=0; j<=s.size()-size; j++)
+        for (int i = 0; i < arr.size(); i++) 
         {
-            if(s.substr(j,size)==arr[i])
+            if (word == arr[i]) 
             {
                 variables.push_back(arr[i]);
+                break;
             }
         }
     }
@@ -46,9 +49,13 @@ vector<char> findOperators(string s, vector<char> arr)
 {
     vector<char> operators;
 
-    for(int i=0; i<s.size(); i++)
+    for(int i = 0; i < s.size(); i++)
     {
-        for(int j=0; j<arr.size(); j++)
+        if (isdigit(s[i])) 
+        {
+            continue; // Skip digits
+        }
+        for(int j = 0; j < arr.size(); j++)
         {
             if(arr[j] == s[i])
             {
@@ -56,17 +63,30 @@ vector<char> findOperators(string s, vector<char> arr)
             }
         }
     }
-
     return operators;
 }
+
+vector<char> findDigits(string s) 
+{
+    vector<char> digits;
+
+    for (char c : s) {
+        if (isdigit(c)) {
+            digits.push_back(c);
+        }
+    }
+
+    return digits;
+}
+
 
 int main()
 {
     ofstream file("practical1_input.txt");
     string input;
 
-    cout<<"Enter input: ";
-    cin>>input;
+    cout << "Enter input: ";
+    getline(cin, input);
 
     file<<input<<endl;
     file.close();
@@ -80,7 +100,7 @@ int main()
     while(getline(inputFile, line))
     {
         cout<<line;
-        totalline = totalline + line;
+        totalline = totalline + line + " ";
     }
     cout<<endl;
 
@@ -101,6 +121,7 @@ int main()
     vector<string> keywords = findKeywords(totalline, keywordsList);
     vector<string> variables = findVariables(totalline, variablesList);
     vector<char> operators = findOperators(totalline, operatorsAndSpecialSymbolsList);
+    vector<char> digits = findDigits(totalline);
 
     if(keywords.size()!=0)
     {
@@ -114,7 +135,7 @@ int main()
     }
     else
     {
-        cout<<"Not Found"<<endl;
+        cout<<"Keywords Not Found"<<endl;
     }
 
     if(variables.size()!=0)
@@ -129,7 +150,7 @@ int main()
     }
     else
     {
-        cout<<"Not Found"<<endl;
+        cout<<"Variables Not Found"<<endl;
     }
 
     if(operators.size()!=0)
@@ -144,7 +165,22 @@ int main()
     }
     else
     {
-        cout<<"Not Found"<<endl;
+        cout<<"Operators Not Found"<<endl;
+    }
+
+    if(digits.size()!=0)
+    {
+        cout<<"Digits are: ";
+
+        for(int i=0; i<digits.size(); i++)
+        {
+            cout<<digits[i]<<" ";
+        }
+        cout<<endl;
+    }
+    else
+    {
+        cout<<"Digits Not Found"<<endl;
     }
 
     return 0;
