@@ -88,3 +88,40 @@ header nav a:hover {
 .box p {
     margin-top: 10px;
 }
+
+.box-two {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    background-image: url('https://salangpurhanumanji.org/wp-content/uploads/2024/02/Kashtabhanjan-Dev-Banner-3.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+}
+
+.box-two-inner {
+    background-color: rgb(113, 26, 14);
+    padding: 20px;
+    margin: 20px;
+    width: 40%;
+    text-align: left;
+    font-size: 1.5em;
+    font-family: 'Oswald', sans-serif;
+    opacity: 0.8;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10%;
+    color: white; 
+}
+
+.box-two-inner-heading {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;  
+}
