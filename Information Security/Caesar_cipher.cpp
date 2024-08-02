@@ -1,88 +1,123 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string encryption(string plainText, int key, vector<char> alphabets)
+string encryption(string plainText, int key, vector<char> smallAlphabets, vector<char> capitalAlphabets)
 {
-    string encryptedString="";
+    string encryptedString = "";
     int index;
 
-    for(int i=0; i<plainText.size(); i++)
+    for (int i = 0; i < plainText.size(); i++)
     {
-        for(int j=0; j<alphabets.size(); j++)
+        char c = plainText[i];
+        if (c == ' ')
         {
-            char c = plainText[i];
-            
-            if(alphabets[j]==c)
-            {
-                index = j;    
-            }
+            encryptedString += ' ';
+            continue;
         }
-        encryptedString = encryptedString + (alphabets[(key+index)%26]);
+
+        if (islower(c))
+        {
+            for (int j = 0; j < smallAlphabets.size(); j++)
+            {
+                if (smallAlphabets[j] == c)
+                {
+                    index = j;
+                    break;
+                }
+            }
+            encryptedString += smallAlphabets[(key + index) % 26];
+        }
+        else if (isupper(c))
+        {
+            for (int j = 0; j < capitalAlphabets.size(); j++)
+            {
+                if (capitalAlphabets[j] == c)
+                {
+                    index = j;
+                    break;
+                }
+            }
+            encryptedString += capitalAlphabets[(key + index) % 26];
+        }
     }
 
     return encryptedString;
 }
 
-string decryption(string encryptedText, int key, vector<char> alphabets)
+string decryption(string encryptedText, int key, vector<char> smallAlphabets, vector<char> capitalAlphabets)
 {
-    string decryptedString="";
+    string decryptedString = "";
     int index;
 
-    for(int i=0; i<encryptedText.size(); i++)
+    for (int i = 0; i < encryptedText.size(); i++)
     {
-        for(int j=0; j<alphabets.size(); j++)
+        char c = encryptedText[i];
+        if (c == ' ')
         {
-            char c = encryptedText[i];
+            decryptedString += ' ';
+            continue;
+        }
 
-            if(alphabets[j]==c)
+        if (islower(c))
+        {
+            for (int j = 0; j < smallAlphabets.size(); j++)
             {
-                index = j;    
+                if (smallAlphabets[j] == c)
+                {
+                    index = j;
+                    break;
+                }
             }
+
+            int newIndex = (index - key) % 26;
+            
+            if (newIndex < 0)
+            {
+                newIndex += 26;
+            }
+            decryptedString += smallAlphabets[newIndex];
         }
-
-        int newIndex = (index-key)%26;
-
-        if(newIndex < 0)
+        else if (isupper(c))
         {
-            newIndex = newIndex + 26;
-        }
+            for (int j = 0; j < capitalAlphabets.size(); j++)
+            {
+                if (capitalAlphabets[j] == c)
+                {
+                    index = j;
+                    break;
+                }
+            }
 
-        decryptedString = decryptedString + (alphabets[newIndex]);
+            int newIndex = (index - key) % 26;
+
+            if (newIndex < 0)
+            {
+                newIndex += 26;
+            }
+            decryptedString += capitalAlphabets[newIndex];
+        }
     }
-    
+
     return decryptedString;
 }
 
 int main()
 {
     string plainText;
-    cout<<"Enter plaintext: ";
-    cin>>plainText;
+    cout << "Enter plaintext: ";
+    getline(cin, plainText);
 
     int key;
-    cout<<"Enter the key: ";
-    cin>>key;
+    cout << "Enter the key: ";
+    cin >> key;
 
-    vector<char> smallAlphabets = {'a', 'b', 'c', 'd' ,'e' ,'f', 'g', 'h', 'i','j','k','l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    vector<char> capitalAlphabets = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}; 
+    vector<char> smallAlphabets = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    vector<char> capitalAlphabets = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
-    bool isUpper = isupper(plainText[0]);
-
-    if(isUpper==true)
-    {
-        string encrypt = encryption(plainText,key,capitalAlphabets);
-        cout<<"Encrypted string is: "<<encrypt<<endl;
-        string decrypt = decryption(encrypt,key,capitalAlphabets);
-        cout<<"Decrypted string is: "<<decrypt<<endl;
-
-    }
-    else
-    {
-        string encrypt = encryption(plainText,key,smallAlphabets);
-        cout<<"Encrypted string is: "<<encrypt<<endl;
-        string decrypt = decryption(encrypt,key,smallAlphabets);
-        cout<<"Decrypted string is: "<<decrypt<<endl;
-    }
+    string encrypt = encryption(plainText, key, smallAlphabets, capitalAlphabets);
+    cout << "Encrypted string is: " << encrypt << endl;
+    string decrypt = decryption(encrypt, key, smallAlphabets, capitalAlphabets);
+    cout << "Decrypted string is: " << decrypt << endl;
 
     return 0;
 }
