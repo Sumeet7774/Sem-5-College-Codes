@@ -1,7 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <cstring>
-#include <cctype>
 
 using namespace std;
 
@@ -140,15 +138,15 @@ int main()
     string decryptedtext; 
     int key = 1;
 
-    vector<char> alpha = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-    vector<char> Alpha = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    vector<char> alphabets = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    vector<char> Alphabets = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
     cout << "Enter Plain Text: ";
     getline(cin, plaintext);
     int size = plaintext.size();
 
-    encrypt(plaintext, ciphertext, key, size, alpha, Alpha);
-    decrypt(ciphertext, decryptedtext, key, size, alpha, Alpha);
+    encrypt(plaintext, ciphertext, key, size, alphabets, Alphabets);
+    decrypt(ciphertext, decryptedtext, key, size, alphabets, Alphabets);
 
     return 0;
 }
