@@ -1,0 +1,8 @@
+Total Reviews Processed: 94
+Valid Reviews: 79
+Invalid Reviews: 15
+
+Top 3 Products with Highest Average Ratings:
+Product ID: P1Q2R3S4T5    Average Rating: 4.12
+Product ID: M4N5O6P7Q8    Average Rating: 3.75
+Product ID: G6H7I8J9K0    Average Rating: 3.59
